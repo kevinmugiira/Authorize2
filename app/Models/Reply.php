@@ -14,6 +14,11 @@ class Reply extends Model
         'user_id'
     ];
 
+    public function isBest()
+    {
+        return $this->id == $this->conversation->best_reply_id;
+    }
+
 
     public function user()
     {

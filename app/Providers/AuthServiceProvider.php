@@ -27,8 +27,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('update_conversation', function (User $user, Conversation $conversation){
-        return $conversation->user()->is($user);
+        /* this is now removed since a policy has been created
+        Gate::define('update_conversation', function (User $user){
+        return true;
+        }); */
+
+        Gate::before(function ($user, $ability){
+            return $user->abilities()->contains($ability);
         });
     }
 }

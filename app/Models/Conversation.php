@@ -10,6 +10,12 @@ class Conversation extends Model
 {
     use HasFactory;
 
+    public function setBestReply(Reply $reply)
+    {
+        $this->best_reply_id = $reply->id;
+        $this->save();
+    }
+
     protected $fillable = [
         'user_id'
     ];

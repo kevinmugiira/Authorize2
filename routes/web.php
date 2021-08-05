@@ -22,5 +22,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 Route::get('conversations', [\App\Http\Controllers\ConversationController::class,'index']);
-Route::get('conversation/{id}', [\App\Http\Controllers\ConversationController::class,'show']);
+Route::get('conversation/{id}', [\App\Http\Controllers\ConversationController::class,'show'])->middleware('can:view,id');
 Route::post('conversation/{id}', [\App\Http\Controllers\ReplyController::class,'store']);
+
+Route::post('best-reply/{reply}', [\App\Http\Controllers\BestReplyController::class,'store']);
+
+
+Route::get('/reports', function () {
+    return 'The secret reports';
+})->middleware('can:view_reports');
